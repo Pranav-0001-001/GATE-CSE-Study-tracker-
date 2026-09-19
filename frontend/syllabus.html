@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GATE CSE Syllabus Tracker - GATETrack</title>
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/syllabus.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <script src="js/theme.js"></script>
+  <script src="js/api.js"></script>
+</head>
+<body>
+  <div class="app-wrapper">
+    <!-- Desktop Sidebar -->
+    <aside class="sidebar" aria-label="Main Navigation">
+      <a href="dashboard.html" class="sidebar-brand">
+        <div class="brand-icon">🎓</div>
+        <div>
+          <div class="brand-title">GATETrack</div>
+          <span class="brand-badge">CSE 2026</span>
+        </div>
+      </a>
+
+      <nav class="sidebar-nav">
+        <a href="dashboard.html" class="nav-link">
+          <span class="nav-icon">📊</span>
+          <span>Dashboard</span>
+        </a>
+        <a href="timer.html" class="nav-link">
+          <span class="nav-icon">⏱️</span>
+          <span>Study Timer</span>
+        </a>
+        <a href="syllabus.html" class="nav-link active">
+          <span class="nav-icon">📚</span>
+          <span>GATE Syllabus</span>
+        </a>
+        <a href="habits.html" class="nav-link">
+          <span class="nav-icon">🎯</span>
+          <span>Habits</span>
+        </a>
+        <a href="analytics.html" class="nav-link">
+          <span class="nav-icon">📈</span>
+          <span>Analytics</span>
+        </a>
+        <a href="profile.html" class="nav-link">
+          <span class="nav-icon">👤</span>
+          <span>Profile</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <button class="theme-toggle-btn" title="Toggle Theme" aria-label="Toggle Theme">
+          <span class="theme-text">Dark Mode</span>
+          <span class="theme-icon">🌙</span>
+        </button>
+
+        <div class="user-snippet">
+          <div class="user-avatar" id="sidebar-user-avatar">G</div>
+          <div class="user-info">
+            <div class="user-name" id="sidebar-user-name">Student</div>
+            <div class="user-email" id="sidebar-user-email">gate@aspirant.com</div>
+          </div>
+          <button class="logout-btn" id="logout-btn" title="Log Out" aria-label="Log Out">🚪</button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Mobile Top Bar -->
+    <header class="mobile-topbar">
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <div class="brand-icon" style="width: 30px; height: 30px; font-size: 1rem;">🎓</div>
+        <span style="font-weight: 800; font-size: 1.1rem;">GATETrack</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <button class="theme-toggle-btn btn-sm" style="padding: 0.35rem 0.5rem;">
+          <span class="theme-icon">🌙</span>
+        </button>
+        <a href="profile.html" class="user-avatar" style="width: 30px; height: 30px; font-size: 0.8rem;">G</a>
+      </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      <header class="page-header">
+        <div>
+          <h1 class="page-title">GATE CSE Syllabus Tracker 📚</h1>
+          <p class="page-subtitle">Track completion across all 11 official subjects and subtopics. Progress updates automatically.</p>
+        </div>
+      </header>
+
+      <!-- Overall Summary Card -->
+      <section class="syllabus-summary-card">
+        <div class="syllabus-summary-top">
+          <div>
+            <span class="text-sm text-muted" style="text-transform: uppercase; letter-spacing: 0.5px; font-weight: 700;">Overall Progress</span>
+            <div class="syllabus-overall-percent" id="syllabus-overall-percent">0%</div>
+          </div>
+          <span class="text-sm text-muted">Official GATE CSE 2025/2026 Syllabus</span>
+        </div>
+
+        <div class="progress-container" style="height: 12px;">
+          <div class="progress-bar-fill" id="syllabus-overall-fill" style="width: 0%;"></div>
+        </div>
+
+        <div class="syllabus-status-counts">
+          <div class="status-stat">
+            <span class="status-dot completed"></span>
+            <span id="stat-completed-count">0 Completed</span>
+          </div>
+          <div class="status-stat">
+            <span class="status-dot in-progress"></span>
+            <span id="stat-in-progress-count">0 In Progress</span>
+          </div>
+          <div class="status-stat">
+            <span class="status-dot not-started"></span>
+            <span id="stat-not-started-count">0 Not Started</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Subject Accordion List -->
+      <section class="subject-list" id="syllabus-subjects-container">
+        <div class="text-sm text-muted" style="padding: 2rem; text-align: center;"><span class="spinner"></span> Loading syllabus subjects...</div>
+      </section>
+    </main>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-bottom-nav" aria-label="Mobile Navigation">
+      <a href="dashboard.html" class="mobile-nav-item">
+        <span class="nav-icon">📊</span>
+        <span>Home</span>
+      </a>
+      <a href="timer.html" class="mobile-nav-item">
+        <span class="nav-icon">⏱️</span>
+        <span>Timer</span>
+      </a>
+      <a href="syllabus.html" class="mobile-nav-item active">
+        <span class="nav-icon">📚</span>
+        <span>Syllabus</span>
+      </a>
+      <a href="habits.html" class="mobile-nav-item">
+        <span class="nav-icon">🎯</span>
+        <span>Habits</span>
+      </a>
+      <a href="analytics.html" class="mobile-nav-item">
+        <span class="nav-icon">📈</span>
+        <span>Analytics</span>
+      </a>
+    </nav>
+  </div>
+
+  <script src="js/navigation.js"></script>
+  <script src="js/syllabus.js"></script>
+</body>
+</html>

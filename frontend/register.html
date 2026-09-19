@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Account - GATETrack</title>
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/auth.css">
+  <script src="js/theme.js"></script>
+  <script src="js/api.js"></script>
+</head>
+<body class="auth-page">
+  <div style="position: absolute; top: 1.5rem; right: 1.5rem; z-index: 100;">
+    <button class="theme-toggle-btn btn-sm" style="width: auto; padding: 0.4rem 0.75rem;">
+      <span class="theme-icon">🌙</span>
+      <span class="theme-text">Dark Mode</span>
+    </button>
+  </div>
+
+  <div class="auth-container">
+    <div class="auth-brand">
+      <div class="auth-brand-logo">🎓</div>
+      <h1 class="auth-brand-title">GATETrack</h1>
+      <p class="auth-brand-subtitle">Your dedicated companion for GATE CSE preparation</p>
+    </div>
+
+    <div class="auth-card">
+      <h2 class="auth-title">Create Your Account 🚀</h2>
+      <p class="auth-subtitle">Start tracking your preparation systematically from day one.</p>
+
+      <div id="auth-error" class="auth-error-banner" role="alert"></div>
+
+      <form id="register-form" novalidate>
+        <div class="form-group">
+          <label for="name" class="form-label">Full Name</label>
+          <input type="text" id="name" class="form-input" placeholder="e.g. Pranav Sharma" required autocomplete="name" />
+        </div>
+
+        <div class="form-group">
+          <label for="email" class="form-label">Email Address</label>
+          <input type="email" id="email" class="form-input" placeholder="student@example.com" required autocomplete="email" />
+        </div>
+
+        <div class="form-group">
+          <label for="password" class="form-label">Password (min. 6 characters)</label>
+          <div class="password-input-wrapper">
+            <input type="password" id="password" class="form-input" placeholder="••••••••" required autocomplete="new-password" />
+            <button type="button" class="toggle-password-btn" data-target="password" title="Show/Hide password" aria-label="Toggle password visibility">👁️‍🗨️</button>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="confirmPassword" class="form-label">Confirm Password</label>
+          <div class="password-input-wrapper">
+            <input type="password" id="confirmPassword" class="form-input" placeholder="••••••••" required autocomplete="new-password" />
+            <button type="button" class="toggle-password-btn" data-target="confirmPassword" title="Show/Hide password" aria-label="Toggle password visibility">👁️‍🗨️</button>
+          </div>
+        </div>
+
+        <button type="submit" id="register-submit-btn" class="btn btn-primary btn-lg">
+          Create Account
+        </button>
+      </form>
+
+      <div class="auth-footer">
+        Already have an account?
+        <a href="login.html" class="auth-link">Log In</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/auth.js"></script>
+</body>
+</html>

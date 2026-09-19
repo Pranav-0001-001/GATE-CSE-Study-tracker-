@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Study Timer - GATETrack</title>
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/timer.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <script src="js/theme.js"></script>
+  <script src="js/api.js"></script>
+</head>
+<body>
+  <div class="app-wrapper">
+    <!-- Desktop Sidebar -->
+    <aside class="sidebar" aria-label="Main Navigation">
+      <a href="dashboard.html" class="sidebar-brand">
+        <div class="brand-icon">🎓</div>
+        <div>
+          <div class="brand-title">GATETrack</div>
+          <span class="brand-badge">CSE 2026</span>
+        </div>
+      </a>
+
+      <nav class="sidebar-nav">
+        <a href="dashboard.html" class="nav-link">
+          <span class="nav-icon">📊</span>
+          <span>Dashboard</span>
+        </a>
+        <a href="timer.html" class="nav-link active">
+          <span class="nav-icon">⏱️</span>
+          <span>Study Timer</span>
+        </a>
+        <a href="syllabus.html" class="nav-link">
+          <span class="nav-icon">📚</span>
+          <span>GATE Syllabus</span>
+        </a>
+        <a href="habits.html" class="nav-link">
+          <span class="nav-icon">🎯</span>
+          <span>Habits</span>
+        </a>
+        <a href="analytics.html" class="nav-link">
+          <span class="nav-icon">📈</span>
+          <span>Analytics</span>
+        </a>
+        <a href="profile.html" class="nav-link">
+          <span class="nav-icon">👤</span>
+          <span>Profile</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <button class="theme-toggle-btn" title="Toggle Theme" aria-label="Toggle Theme">
+          <span class="theme-text">Dark Mode</span>
+          <span class="theme-icon">🌙</span>
+        </button>
+
+        <div class="user-snippet">
+          <div class="user-avatar" id="sidebar-user-avatar">G</div>
+          <div class="user-info">
+            <div class="user-name" id="sidebar-user-name">Student</div>
+            <div class="user-email" id="sidebar-user-email">gate@aspirant.com</div>
+          </div>
+          <button class="logout-btn" id="logout-btn" title="Log Out" aria-label="Log Out">🚪</button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Mobile Top Bar -->
+    <header class="mobile-topbar">
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <div class="brand-icon" style="width: 30px; height: 30px; font-size: 1rem;">🎓</div>
+        <span style="font-weight: 800; font-size: 1.1rem;">GATETrack</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <button class="theme-toggle-btn btn-sm" style="padding: 0.35rem 0.5rem;">
+          <span class="theme-icon">🌙</span>
+        </button>
+        <a href="profile.html" class="user-avatar" style="width: 30px; height: 30px; font-size: 0.8rem;">G</a>
+      </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      <header class="page-header">
+        <div>
+          <h1 class="page-title">Adjustable Study Timer ⏱️</h1>
+          <p class="page-subtitle">Customize your focus sessions. Choose a preset or set your custom study duration.</p>
+        </div>
+      </header>
+
+      <div class="timer-layout">
+        <!-- Left: Stopwatch & Subject Picker -->
+        <div class="timer-card-wrapper">
+          <!-- Subject Selector Card -->
+          <div class="card">
+            <h2 style="font-size: 1rem; font-weight: 700; margin-bottom: 1rem;">Session Setup</h2>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+              <div class="form-group" style="margin-bottom: 0;">
+                <label for="timer-subject-select" class="form-label">Subject</label>
+                <select id="timer-subject-select" class="form-select">
+                  <option value="">Select Subject...</option>
+                </select>
+              </div>
+              <div class="form-group" style="margin-bottom: 0;">
+                <label for="timer-topic-select" class="form-label">Topic</label>
+                <select id="timer-topic-select" class="form-select" disabled>
+                  <option value="">Select Subject first</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Main Adjustable Timer Box -->
+          <div class="timer-main-box">
+            <div class="timer-status-pill" id="timer-status-pill">
+              <span class="timer-pulse-dot"></span>
+              <span id="timer-status-text">Ready to Study</span>
+            </div>
+
+            <!-- Presets & Adjusters -->
+            <div class="timer-presets-wrapper">
+              <div class="timer-presets" id="timer-presets">
+                <button type="button" class="timer-preset-btn" data-minutes="25">25 min (Pomodoro)</button>
+                <button type="button" class="timer-preset-btn active" data-minutes="45">45 min</button>
+                <button type="button" class="timer-preset-btn" data-minutes="60">60 min (1 Hour)</button>
+                <button type="button" class="timer-preset-btn" data-minutes="90">90 min</button>
+                <button type="button" class="timer-preset-btn" data-minutes="120">120 min (2 Hours)</button>
+                <button type="button" class="timer-preset-btn" data-minutes="custom" id="custom-preset-btn">Custom ⚙️</button>
+              </div>
+
+              <!-- Quick Time Adjusters -->
+              <div class="timer-adjust-controls" id="timer-adjust-controls">
+                <button type="button" class="timer-adjust-btn" id="adjust-minus-15" title="Subtract 15 minutes">-15m</button>
+                <button type="button" class="timer-adjust-btn" id="adjust-minus-5" title="Subtract 5 minutes">-5m</button>
+                <button type="button" class="timer-adjust-btn" id="adjust-plus-5" title="Add 5 minutes">+5m</button>
+                <button type="button" class="timer-adjust-btn" id="adjust-plus-15" title="Add 15 minutes">+15m</button>
+              </div>
+
+              <!-- Custom Time Inputs -->
+              <div class="custom-time-inputs" id="custom-time-inputs">
+                <label for="custom-hours" class="text-xs text-muted">Hours:</label>
+                <input type="number" id="custom-hours" class="custom-time-input" min="0" max="12" value="0" />
+                <label for="custom-minutes" class="text-xs text-muted">Mins:</label>
+                <input type="number" id="custom-minutes" class="custom-time-input" min="1" max="59" value="45" />
+                <button type="button" class="btn btn-sm btn-primary" id="apply-custom-time-btn">Set</button>
+              </div>
+            </div>
+
+            <!-- Big Countdown Display -->
+            <div class="timer-display" id="timer-display">
+              45:00
+            </div>
+
+            <!-- Progress Meter -->
+            <div class="timer-progress-wrapper">
+              <div class="progress-container" style="height: 8px;">
+                <div class="progress-bar-fill" id="timer-progress-fill" style="width: 0%;"></div>
+              </div>
+              <div class="timer-target-label" id="timer-target-label">Target: 45 minutes</div>
+            </div>
+
+            <div class="timer-active-topic" id="timer-active-topic-label">
+              General Preparation
+            </div>
+
+            <div class="timer-controls">
+              <button class="btn btn-primary btn-lg" id="timer-start-btn">Start Timer</button>
+              <button class="btn btn-secondary btn-lg" id="timer-pause-btn" style="display: none;">Pause</button>
+              <button class="btn btn-primary btn-lg" id="timer-resume-btn" style="display: none;">Resume</button>
+              <button class="btn btn-success btn-lg" id="timer-finish-btn" style="display: none;">Finish Session 🎉</button>
+              <button class="btn btn-outline" id="timer-reset-btn" style="display: none;">Reset</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Study History Column -->
+        <div>
+          <div class="card">
+            <div class="history-header">
+              <h2 style="font-size: 1.1rem; font-weight: 700;">Study History</h2>
+              <div class="history-filters" role="tablist">
+                <button class="filter-pill active" data-filter="today">Today</button>
+                <button class="filter-pill" data-filter="week">Week</button>
+                <button class="filter-pill" data-filter="month">Month</button>
+                <button class="filter-pill" data-filter="all">All</button>
+              </div>
+            </div>
+
+            <div class="history-total-banner">
+              <span class="history-total-label">Total Time in Period:</span>
+              <span class="history-total-value" id="history-total-time">0m</span>
+            </div>
+
+            <div class="history-list" id="timer-history-list">
+              <div class="text-sm text-muted" style="padding: 1rem; text-align: center;"><span class="spinner"></span> Loading history...</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-bottom-nav" aria-label="Mobile Navigation">
+      <a href="dashboard.html" class="mobile-nav-item">
+        <span class="nav-icon">📊</span>
+        <span>Home</span>
+      </a>
+      <a href="timer.html" class="mobile-nav-item active">
+        <span class="nav-icon">⏱️</span>
+        <span>Timer</span>
+      </a>
+      <a href="syllabus.html" class="mobile-nav-item">
+        <span class="nav-icon">📚</span>
+        <span>Syllabus</span>
+      </a>
+      <a href="habits.html" class="mobile-nav-item">
+        <span class="nav-icon">🎯</span>
+        <span>Habits</span>
+      </a>
+      <a href="analytics.html" class="mobile-nav-item">
+        <span class="nav-icon">📈</span>
+        <span>Analytics</span>
+      </a>
+    </nav>
+  </div>
+
+  <!-- Finish Modal -->
+  <div class="modal-overlay" id="finish-modal" role="dialog" aria-modal="true" aria-labelledby="modal-complete-title">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="modal-complete-title" style="font-size: 1.25rem;">Session Completed 🎉</h3>
+        <button class="modal-close" id="close-finish-modal" aria-label="Close modal">×</button>
+      </div>
+
+      <div style="background-color: var(--bg-input); padding: 1.25rem; border-radius: var(--radius-md); margin-bottom: 1.25rem; border: 1px solid var(--border-color);">
+        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+          <span class="text-sm text-muted">Subject:</span>
+          <strong class="text-sm" id="finish-modal-subject">-</strong>
+        </div>
+        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+          <span class="text-sm text-muted">Topic:</span>
+          <strong class="text-sm" id="finish-modal-topic">-</strong>
+        </div>
+        <div style="display: flex; justify-content: space-between;">
+          <span class="text-sm text-muted">Duration:</span>
+          <strong class="text-sm" style="color: var(--primary);" id="finish-modal-duration">0m</strong>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="finish-notes-input" class="form-label">Session Notes (Optional)</label>
+        <textarea id="finish-notes-input" class="form-textarea" rows="3" placeholder="What key concepts did you master or PYQs solved?"></textarea>
+      </div>
+
+      <div style="display: flex; justify-content: flex-end; gap: 0.75rem;">
+        <button class="btn btn-secondary" onclick="document.getElementById('finish-modal').classList.remove('active')">Cancel</button>
+        <button class="btn btn-primary" id="save-session-confirm-btn">Save Session</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/navigation.js"></script>
+  <script src="js/timer.js"></script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GATETrack - GATE CSE Study & Habit Tracker</title>
+  <link rel="stylesheet" href="css/global.css">
+  <script src="js/theme.js"></script>
+  <script src="js/api.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      if (API.getToken()) {
+        window.location.href = 'dashboard.html';
+      } else {
+        window.location.href = 'login.html';
+      }
+    });
+  </script>
+</head>
+<body style="display: flex; align-items: center; justify-content: center; height: 100vh;">
+  <div style="text-align: center;">
+    <div class="brand-icon" style="margin: 0 auto 1rem auto; width: 50px; height: 50px; font-size: 1.5rem;">🎓</div>
+    <div class="spinner"></div>
+    <p class="text-sm text-muted" style="margin-top: 1rem;">Loading GATETrack...</p>
+  </div>
+</body>
+</html>

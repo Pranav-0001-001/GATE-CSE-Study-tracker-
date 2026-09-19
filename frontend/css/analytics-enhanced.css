@@ -1,0 +1,138 @@
+/* ==========================================================================
+   GATETrack — Analytics (simple)
+   Reads your existing theme tokens with safe fallbacks.
+   ========================================================================== */
+
+:root {
+  --ga-ink:      var(--text-primary,  #14161c);
+  --ga-muted:    var(--text-muted,    #6b7280);
+  --ga-line:     var(--border-color,  rgba(120,130,150,.22));
+  --ga-surface:  var(--card-bg,       #ffffff);
+  --ga-raise:    var(--bg-secondary,  rgba(120,130,150,.08));
+  --ga-primary:  var(--primary,       #4f46e5);
+  --ga-success:  var(--success,       #16a34a);
+  --ga-warn:     var(--warning,       #d97706);
+  --ga-radius:   14px;
+}
+
+/* Headline banner: the one thing to read first */
+.ga-headline {
+  padding: 1.25rem 1.4rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid var(--ga-line);
+  border-radius: var(--ga-radius);
+  background: var(--ga-surface);
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.ga-headline-icon { font-size: 1.8rem; line-height: 1; }
+.ga-headline-text { font-size: 0.95rem; color: var(--ga-ink); line-height: 1.5; margin: 0; }
+.ga-headline-text b { font-weight: 700; }
+
+/* Four simple stat cards */
+.ga-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+.ga-stat {
+  padding: 1.1rem 1.2rem;
+  border: 1px solid var(--ga-line);
+  border-radius: var(--ga-radius);
+  background: var(--ga-surface);
+}
+.ga-stat-label {
+  font-size: 0.78rem;
+  color: var(--ga-muted);
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+}
+.ga-stat-value {
+  font-size: 1.7rem;
+  font-weight: 800;
+  color: var(--ga-ink);
+  line-height: 1.1;
+}
+.ga-stat-sub {
+  font-size: 0.76rem;
+  color: var(--ga-muted);
+  margin-top: 0.3rem;
+}
+
+/* Simple weekly bar chart */
+.ga-week {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  height: 140px;
+  padding-top: 8px;
+}
+.ga-week-col {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 6px;
+}
+.ga-week-bar {
+  width: 100%;
+  max-width: 40px;
+  border-radius: 6px 6px 3px 3px;
+  background: var(--ga-primary);
+  min-height: 3px;
+}
+.ga-week-bar.empty { background: var(--ga-line); }
+.ga-week-bar.best { background: var(--ga-success); }
+.ga-week-hrs { font-size: 0.68rem; color: var(--ga-muted); font-weight: 600; }
+.ga-week-day { font-size: 0.72rem; color: var(--ga-muted); font-weight: 600; }
+
+/* Subject progress: single clear bar per subject */
+.ga-subject {
+  padding: 0.65rem 0;
+  border-bottom: 1px solid var(--ga-line);
+}
+.ga-subject:last-child { border-bottom: 0; }
+.ga-subject-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 0.4rem;
+  gap: 0.75rem;
+}
+.ga-subject-name { font-size: 0.86rem; font-weight: 600; color: var(--ga-ink); }
+.ga-subject-pct { font-size: 0.8rem; font-weight: 700; color: var(--ga-primary); }
+.ga-subject-bar { height: 8px; border-radius: 99px; background: var(--ga-raise); overflow: hidden; }
+.ga-subject-bar i { display: block; height: 100%; border-radius: 99px; background: var(--ga-primary); }
+
+/* Reflections list */
+.ga-checkin {
+  display: grid;
+  grid-template-columns: 56px 1fr auto;
+  gap: 0.85rem;
+  align-items: center;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid var(--ga-line);
+}
+.ga-checkin:last-child { border-bottom: 0; }
+.ga-checkin-date { font-size: 0.72rem; font-weight: 700; color: var(--ga-muted); line-height: 1.3; }
+.ga-checkin-note { font-size: 0.84rem; color: var(--ga-ink); line-height: 1.4; }
+.ga-checkin-mood { font-size: 1.2rem; }
+
+/* Empty states — shown until the user has real data */
+.ga-empty {
+  font-size: 0.85rem;
+  color: var(--ga-muted);
+  text-align: center;
+  padding: 1.5rem 1rem;
+  line-height: 1.5;
+}
+.ga-empty b { display: block; color: var(--ga-ink); margin-bottom: 0.3rem; font-size: 0.9rem; }
+
+@media (max-width: 720px) {
+  .ga-stats { grid-template-columns: repeat(2, 1fr); }
+  .ga-headline { flex-direction: column; text-align: center; }
+}

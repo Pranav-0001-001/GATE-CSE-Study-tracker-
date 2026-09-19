@@ -1,0 +1,29 @@
+{
+  "name": "gatetrack",
+  "version": "1.0.0",
+  "description": "GATE CSE Study and Habit Tracker",
+  "main": "backend/server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "dev": "node --watch backend/server.js",
+    "seed": "node backend/database/seed-syllabus.js",
+    "test:api": "node test-api.js"
+  },
+  "keywords": [
+    "gate",
+    "cse",
+    "study-tracker",
+    "habit-tracker",
+    "pomodoro",
+    "syllabus"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "jsonwebtoken": "^9.0.2"
+  }
+}

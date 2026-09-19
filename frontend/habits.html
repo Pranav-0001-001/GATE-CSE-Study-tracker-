@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Daily Habits - GATETrack</title>
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/habits.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <script src="js/theme.js"></script>
+  <script src="js/api.js"></script>
+</head>
+<body>
+  <div class="app-wrapper">
+    <!-- Desktop Sidebar -->
+    <aside class="sidebar" aria-label="Main Navigation">
+      <a href="dashboard.html" class="sidebar-brand">
+        <div class="brand-icon">🎓</div>
+        <div>
+          <div class="brand-title">GATETrack</div>
+          <span class="brand-badge">CSE 2026</span>
+        </div>
+      </a>
+
+      <nav class="sidebar-nav">
+        <a href="dashboard.html" class="nav-link">
+          <span class="nav-icon">📊</span>
+          <span>Dashboard</span>
+        </a>
+        <a href="timer.html" class="nav-link">
+          <span class="nav-icon">⏱️</span>
+          <span>Study Timer</span>
+        </a>
+        <a href="syllabus.html" class="nav-link">
+          <span class="nav-icon">📚</span>
+          <span>GATE Syllabus</span>
+        </a>
+        <a href="habits.html" class="nav-link active">
+          <span class="nav-icon">🎯</span>
+          <span>Habits</span>
+        </a>
+        <a href="analytics.html" class="nav-link">
+          <span class="nav-icon">📈</span>
+          <span>Analytics</span>
+        </a>
+        <a href="profile.html" class="nav-link">
+          <span class="nav-icon">👤</span>
+          <span>Profile</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <button class="theme-toggle-btn" title="Toggle Theme" aria-label="Toggle Theme">
+          <span class="theme-text">Dark Mode</span>
+          <span class="theme-icon">🌙</span>
+        </button>
+
+        <div class="user-snippet">
+          <div class="user-avatar" id="sidebar-user-avatar">G</div>
+          <div class="user-info">
+            <div class="user-name" id="sidebar-user-name">Student</div>
+            <div class="user-email" id="sidebar-user-email">gate@aspirant.com</div>
+          </div>
+          <button class="logout-btn" id="logout-btn" title="Log Out" aria-label="Log Out">🚪</button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Mobile Top Bar -->
+    <header class="mobile-topbar">
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <div class="brand-icon" style="width: 30px; height: 30px; font-size: 1rem;">🎓</div>
+        <span style="font-weight: 800; font-size: 1.1rem;">GATETrack</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <button class="theme-toggle-btn btn-sm" style="padding: 0.35rem 0.5rem;">
+          <span class="theme-icon">🌙</span>
+        </button>
+        <a href="profile.html" class="user-avatar" style="width: 30px; height: 30px; font-size: 0.8rem;">G</a>
+      </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      <div class="habits-topbar">
+        <div class="habits-date-banner">
+          <span class="habits-date-title">Today's Focus</span>
+          <h1 class="habits-date-string" id="habits-today-date">Friday, September 4</h1>
+        </div>
+        <button class="btn btn-primary" id="open-add-habit-btn">
+          <span>+</span> Create New Habit
+        </button>
+      </div>
+
+      <!-- Habits Summary Card -->
+      <section class="card" style="margin-bottom: 2rem;">
+        <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem;">
+          <span class="text-sm text-muted" id="habits-summary-count">0 of 0 Completed</span>
+          <span class="text-sm" style="font-weight: 800; color: var(--primary);" id="habits-summary-percent">0%</span>
+        </div>
+        <div class="progress-container" style="height: 10px;">
+          <div class="progress-bar-fill progress-fill-success" id="habits-summary-fill" style="width: 0%;"></div>
+        </div>
+      </section>
+
+      <!-- Habit Items List -->
+      <section class="habits-list" id="habits-list-container">
+        <div class="text-sm text-muted" style="padding: 2rem; text-align: center;"><span class="spinner"></span> Loading habits...</div>
+      </section>
+    </main>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-bottom-nav" aria-label="Mobile Navigation">
+      <a href="dashboard.html" class="mobile-nav-item">
+        <span class="nav-icon">📊</span>
+        <span>Home</span>
+      </a>
+      <a href="timer.html" class="mobile-nav-item">
+        <span class="nav-icon">⏱️</span>
+        <span>Timer</span>
+      </a>
+      <a href="syllabus.html" class="mobile-nav-item">
+        <span class="nav-icon">📚</span>
+        <span>Syllabus</span>
+      </a>
+      <a href="habits.html" class="mobile-nav-item active">
+        <span class="nav-icon">🎯</span>
+        <span>Habits</span>
+      </a>
+      <a href="analytics.html" class="mobile-nav-item">
+        <span class="nav-icon">📈</span>
+        <span>Analytics</span>
+      </a>
+    </nav>
+  </div>
+
+  <!-- Add Habit Modal -->
+  <div class="modal-overlay" id="add-habit-modal" role="dialog" aria-modal="true" aria-labelledby="modal-add-habit-title">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="modal-add-habit-title" style="font-size: 1.25rem;">Create New Daily Habit 🎯</h3>
+        <button class="modal-close" id="close-add-habit-modal" aria-label="Close modal">×</button>
+      </div>
+
+      <form id="add-habit-form">
+        <div class="form-group">
+          <label for="habit-name-input" class="form-label">Habit Name</label>
+          <input type="text" id="habit-name-input" class="form-input" placeholder="e.g. Solve 30 PYQs, Revise Formula Sheet" required />
+        </div>
+
+        <div class="form-group">
+          <label for="habit-target-input" class="form-label">Daily Target</label>
+          <input type="text" id="habit-target-input" class="form-input" placeholder="e.g. 30 Questions, 6 Hours, 1 Lecture" />
+        </div>
+
+        <div class="form-group">
+          <label for="habit-icon-select" class="form-label">Icon</label>
+          <select id="habit-icon-select" class="form-select">
+            <option value="🎯">🎯 Target / Focus</option>
+            <option value="⏱️">⏱️ Study Hours</option>
+            <option value="📝">📝 Questions / PYQs</option>
+            <option value="🧠">🧠 Revision / Theory</option>
+            <option value="🏃">🏃 Exercise / Health</option>
+            <option value="🧘">🧘 Meditation / Mindfulness</option>
+            <option value="📚">📚 Reading Notes</option>
+            <option value="💻">💻 Coding / Algorithms</option>
+            <option value="🛡️">🛡️ Discipline / No Distractions</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="habit-desc-input" class="form-label">Notes / Description (Optional)</label>
+          <input type="text" id="habit-desc-input" class="form-input" placeholder="Brief note on why this habit matters" />
+        </div>
+
+        <div style="display: flex; justify-content: flex-end; gap: 0.75rem; margin-top: 1.5rem;">
+          <button type="button" class="btn btn-secondary" onclick="document.getElementById('add-habit-modal').classList.remove('active')">Cancel</button>
+          <button type="submit" class="btn btn-primary" id="create-habit-submit-btn">Create Habit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/navigation.js"></script>
+  <script src="js/habits.js"></script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - GATETrack</title>
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/auth.css">
+  <script src="js/theme.js"></script>
+  <script src="js/api.js"></script>
+</head>
+<body class="auth-page">
+  <div style="position: absolute; top: 1.5rem; right: 1.5rem; z-index: 100;">
+    <button class="theme-toggle-btn btn-sm" style="width: auto; padding: 0.4rem 0.75rem;">
+      <span class="theme-icon">🌙</span>
+      <span class="theme-text">Dark Mode</span>
+    </button>
+  </div>
+
+  <div class="auth-container">
+    <div class="auth-brand">
+      <div class="auth-brand-logo">🎓</div>
+      <h1 class="auth-brand-title">GATETrack</h1>
+      <p class="auth-brand-subtitle">Master GATE Computer Science & Information Technology</p>
+    </div>
+
+    <div class="auth-card">
+      <h2 class="auth-title">Welcome Back 👋</h2>
+      <p class="auth-subtitle">Log in to track your syllabus, habits, and preparation streak.</p>
+
+      <div id="auth-error" class="auth-error-banner" role="alert"></div>
+
+      <form id="login-form" novalidate>
+        <div class="form-group">
+          <label for="email" class="form-label">Email Address</label>
+          <input type="email" id="email" class="form-input" placeholder="student@example.com" required autocomplete="email" />
+        </div>
+
+        <div class="form-group">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <label for="password" class="form-label">Password</label>
+          </div>
+          <div class="password-input-wrapper">
+            <input type="password" id="password" class="form-input" placeholder="••••••••" required autocomplete="current-password" />
+            <button type="button" class="toggle-password-btn" data-target="password" title="Show/Hide password" aria-label="Toggle password visibility">👁️‍🗨️</button>
+          </div>
+        </div>
+
+        <button type="submit" id="login-submit-btn" class="btn btn-primary btn-lg">
+          Log In
+        </button>
+      </form>
+
+      <div class="auth-footer">
+        Don't have an account?
+        <a href="register.html" class="auth-link">Create Account</a>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/auth.js"></script>
+</body>
+</html>

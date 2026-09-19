@@ -1,0 +1,211 @@
+/* ==========================================================================
+   GATETrack - GATE CSE Syllabus Tracker CSS
+   ========================================================================== */
+
+.syllabus-summary-card {
+  background: linear-gradient(135deg, var(--bg-card) 0%, var(--bg-elevated) 100%);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-xl);
+  padding: 2rem;
+  margin-bottom: 2rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.syllabus-summary-top {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
+}
+
+.syllabus-overall-percent {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--primary);
+  line-height: 1;
+}
+
+.syllabus-status-counts {
+  display: flex;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+}
+
+.status-stat {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
+.status-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+.status-dot.completed { background-color: var(--success); }
+.status-dot.in-progress { background-color: var(--warning); }
+.status-dot.not-started { background-color: var(--text-dim); }
+
+/* Subject Cards Accordion */
+.subject-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.subject-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: border-color var(--transition-fast);
+}
+
+.subject-card.expanded {
+  border-color: var(--primary);
+}
+
+.subject-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.25rem 1.5rem;
+  cursor: pointer;
+  user-select: none;
+  background-color: var(--bg-card);
+  transition: background-color var(--transition-fast);
+}
+
+.subject-card-header:hover {
+  background-color: var(--bg-card-hover);
+}
+
+.subject-title-area {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  flex: 1;
+}
+
+.subject-code-badge {
+  padding: 0.3rem 0.6rem;
+  border-radius: var(--radius-sm);
+  background-color: var(--bg-input);
+  border: 1px solid var(--border-color);
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: var(--primary);
+}
+
+.subject-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.subject-progress-area {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.subject-fraction {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  min-width: 80px;
+  text-align: right;
+}
+
+.subject-accordion-icon {
+  font-size: 1rem;
+  color: var(--text-dim);
+  transition: transform var(--transition-fast);
+}
+
+.subject-card.expanded .subject-accordion-icon {
+  transform: rotate(180deg);
+}
+
+/* Topics Drawer inside Subject Card */
+.topics-drawer {
+  display: none;
+  border-top: 1px solid var(--border-color);
+  background-color: var(--bg-input);
+  padding: 0.75rem 1.5rem;
+}
+
+.subject-card.expanded .topics-drawer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.topic-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1rem;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color-light);
+  border-radius: var(--radius-md);
+  gap: 1rem;
+  transition: all var(--transition-fast);
+}
+
+.topic-row:hover {
+  border-color: var(--border-color);
+}
+
+.topic-name {
+  font-size: 0.9rem;
+  color: var(--text-main);
+  flex: 1;
+}
+
+.topic-status-group {
+  display: flex;
+  gap: 0.35rem;
+}
+
+.status-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.3rem 0.65rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  background-color: var(--bg-elevated);
+  color: var(--text-dim);
+  border: 1px solid var(--border-color);
+  transition: all var(--transition-fast);
+}
+
+.status-btn:hover {
+  color: var(--text-main);
+  border-color: var(--text-muted);
+}
+
+.status-btn.active.not_started {
+  background-color: var(--bg-input);
+  color: var(--text-muted);
+  border-color: var(--text-dim);
+}
+
+.status-btn.active.in_progress {
+  background-color: var(--warning-bg);
+  color: var(--warning);
+  border-color: var(--warning);
+}
+
+.status-btn.active.completed {
+  background-color: var(--success-bg);
+  color: var(--success);
+  border-color: var(--success);
+}

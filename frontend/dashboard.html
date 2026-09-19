@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard - GATETrack</title>
+  <link rel="stylesheet" href="css/global.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/dashboard.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  <script src="js/theme.js"></script>
+  <script src="js/api.js"></script>
+</head>
+<body>
+  <div class="app-wrapper">
+    <!-- Desktop Sidebar -->
+    <aside class="sidebar" aria-label="Main Navigation">
+      <a href="dashboard.html" class="sidebar-brand">
+        <div class="brand-icon">🎓</div>
+        <div>
+          <div class="brand-title">GATETrack</div>
+          <span class="brand-badge">CSE 2026</span>
+        </div>
+      </a>
+
+      <nav class="sidebar-nav">
+        <a href="dashboard.html" class="nav-link active">
+          <span class="nav-icon">📊</span>
+          <span>Dashboard</span>
+        </a>
+        <a href="timer.html" class="nav-link">
+          <span class="nav-icon">⏱️</span>
+          <span>Study Timer</span>
+        </a>
+        <a href="syllabus.html" class="nav-link">
+          <span class="nav-icon">📚</span>
+          <span>GATE Syllabus</span>
+        </a>
+        <a href="habits.html" class="nav-link">
+          <span class="nav-icon">🎯</span>
+          <span>Habits</span>
+        </a>
+        <a href="analytics.html" class="nav-link">
+          <span class="nav-icon">📈</span>
+          <span>Analytics</span>
+        </a>
+        <a href="profile.html" class="nav-link">
+          <span class="nav-icon">👤</span>
+          <span>Profile</span>
+        </a>
+      </nav>
+
+      <div class="sidebar-footer">
+        <button class="theme-toggle-btn" title="Toggle Theme" aria-label="Toggle Theme">
+          <span class="theme-text">Dark Mode</span>
+          <span class="theme-icon">🌙</span>
+        </button>
+
+        <div class="user-snippet">
+          <div class="user-avatar" id="sidebar-user-avatar">G</div>
+          <div class="user-info">
+            <div class="user-name" id="sidebar-user-name">Student</div>
+            <div class="user-email" id="sidebar-user-email">gate@aspirant.com</div>
+          </div>
+          <button class="logout-btn" id="logout-btn" title="Log Out" aria-label="Log Out">🚪</button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Mobile Top Bar -->
+    <header class="mobile-topbar">
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <div class="brand-icon" style="width: 30px; height: 30px; font-size: 1rem;">🎓</div>
+        <span style="font-weight: 800; font-size: 1.1rem;">GATETrack</span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <button class="theme-toggle-btn btn-sm" style="padding: 0.35rem 0.5rem;">
+          <span class="theme-icon">🌙</span>
+        </button>
+        <a href="profile.html" class="user-avatar" style="width: 30px; height: 30px; font-size: 0.8rem;">G</a>
+      </div>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+      <!-- Greeting Header -->
+      <section class="dashboard-hero">
+        <h1 class="dashboard-hero-title" id="dashboard-greeting">Good morning, Student 👋</h1>
+        <p class="dashboard-hero-subtitle">Stay consistent. Your preparation is building every day.</p>
+      </section>
+
+      <!-- Daily Preparation Check-in Banner -->
+      <div class="checkin-banner" id="daily-checkin-banner" style="display: none;">
+        <div>
+          <div class="checkin-banner-title">Daily Preparation Check-In 📝</div>
+          <div class="checkin-banner-subtitle">Reflect on today's study progress and set tomorrow's focus.</div>
+        </div>
+        <button class="btn btn-sm btn-primary" id="open-checkin-modal-btn">Check In Now</button>
+      </div>
+
+      <!-- 4 Core Summary Metric Cards -->
+      <section class="metrics-grid" aria-label="Preparation Metrics">
+        <div class="metric-card">
+          <div class="metric-header">
+            <span class="metric-label">Study Time Today</span>
+            <span class="metric-icon">⏱️</span>
+          </div>
+          <div class="metric-value" id="metric-today-time">0m</div>
+          <div class="metric-footer">
+            <span>Logged via Timer</span>
+          </div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-header">
+            <span class="metric-label">Syllabus Progress</span>
+            <span class="metric-icon">📚</span>
+          </div>
+          <div class="metric-value" id="metric-syllabus-progress">0%</div>
+          <div class="metric-footer">
+            <span>Official GATE CSE</span>
+          </div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-header">
+            <span class="metric-label">Current Streak</span>
+            <span class="metric-icon">🔥</span>
+          </div>
+          <div class="metric-value" id="metric-current-streak">0 days</div>
+          <div class="metric-footer">
+            <span>Daily study consistency</span>
+          </div>
+        </div>
+
+        <div class="metric-card">
+          <div class="metric-header">
+            <span class="metric-label">Habit Completion</span>
+            <span class="metric-icon">🎯</span>
+          </div>
+          <div class="metric-value" id="metric-habit-completion">0%</div>
+          <div class="metric-footer">
+            <span>Today's active checklist</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Dashboard Two Column Content -->
+      <div class="dashboard-columns">
+        <!-- Left Column: Quick Study Timer & Today's Habits -->
+        <div>
+          <!-- Quick Study Timer Box -->
+          <div class="quick-timer-card">
+            <div class="quick-timer-header">
+              <h2 style="font-size: 1.1rem; font-weight: 700; display: flex; align-items: center; gap: 0.5rem;">
+                <span>⏱️</span> Study Timer
+              </h2>
+              <a href="timer.html" class="btn btn-sm btn-outline">Full Timer →</a>
+            </div>
+
+            <div class="timer-selectors">
+              <div>
+                <label for="quick-timer-subject" class="form-label text-xs">Subject</label>
+                <select id="quick-timer-subject" class="form-select">
+                  <option value="">Select Subject...</option>
+                </select>
+              </div>
+              <div>
+                <label for="quick-timer-topic" class="form-label text-xs">Topic</label>
+                <select id="quick-timer-topic" class="form-select" disabled>
+                  <option value="">Select Subject first</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- Quick Duration Presets -->
+            <div class="quick-timer-presets" id="quick-timer-presets">
+              <button type="button" class="quick-preset-btn" data-minutes="25">25m</button>
+              <button type="button" class="quick-preset-btn active" data-minutes="45">45m</button>
+              <button type="button" class="quick-preset-btn" data-minutes="60">60m</button>
+              <button type="button" class="quick-preset-btn" data-minutes="90">90m</button>
+            </div>
+
+            <div class="quick-timer-display" id="quick-timer-display">
+              45:00
+            </div>
+
+            <div class="quick-timer-progress">
+              <div class="progress-container" style="height: 6px;">
+                <div class="progress-bar-fill" id="quick-timer-progress-fill" style="width: 0%;"></div>
+              </div>
+            </div>
+
+            <div class="quick-timer-controls">
+              <button class="btn btn-primary btn-lg" id="quick-timer-start">Start Timer</button>
+              <button class="btn btn-secondary btn-lg" id="quick-timer-pause" style="display: none;">Pause</button>
+              <button class="btn btn-primary btn-lg" id="quick-timer-resume" style="display: none;">Resume</button>
+              <button class="btn btn-success btn-lg" id="quick-timer-finish" style="display: none;">Finish Session 🎉</button>
+              <button class="btn btn-outline" id="quick-timer-reset" style="display: none;">Reset</button>
+            </div>
+          </div>
+
+          <!-- Today's Habits Checklist -->
+          <div class="card">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.25rem;">
+              <h2 style="font-size: 1.1rem; font-weight: 700; display: flex; align-items: center; gap: 0.5rem;">
+                <span>🎯</span> Today's Habits Checklist
+              </h2>
+              <a href="habits.html" class="text-xs text-muted" style="text-decoration: underline;">Manage Habits</a>
+            </div>
+            <div class="checklist-container" id="dashboard-habits-list">
+              <div class="text-sm text-muted"><span class="spinner"></span> Loading habits...</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Recent Sessions & Preparation Insights -->
+        <div>
+          <!-- Recent Study Sessions -->
+          <div class="card" style="margin-bottom: 1.5rem;">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 1.25rem;">
+              <h2 style="font-size: 1.1rem; font-weight: 700; display: flex; align-items: center; gap: 0.5rem;">
+                <span>📖</span> Recent Study Sessions
+              </h2>
+              <a href="timer.html" class="text-xs text-muted" style="text-decoration: underline;">View All</a>
+            </div>
+            <div class="recent-sessions-list" id="dashboard-recent-sessions">
+              <div class="text-sm text-muted"><span class="spinner"></span> Loading sessions...</div>
+            </div>
+          </div>
+
+          <!-- Preparation Insights -->
+          <div class="card">
+            <h2 style="font-size: 1.1rem; font-weight: 700; display: flex; align-items: center; gap: 0.5rem; margin-bottom: 1.25rem;">
+              <span>💡</span> Preparation Insights
+            </h2>
+            <div class="insights-grid" id="dashboard-insights">
+              <div class="text-sm text-muted"><span class="spinner"></span> Calculating insights...</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- Mobile Bottom Navigation -->
+    <nav class="mobile-bottom-nav" aria-label="Mobile Navigation">
+      <a href="dashboard.html" class="mobile-nav-item active">
+        <span class="nav-icon">📊</span>
+        <span>Home</span>
+      </a>
+      <a href="timer.html" class="mobile-nav-item">
+        <span class="nav-icon">⏱️</span>
+        <span>Timer</span>
+      </a>
+      <a href="syllabus.html" class="mobile-nav-item">
+        <span class="nav-icon">📚</span>
+        <span>Syllabus</span>
+      </a>
+      <a href="habits.html" class="mobile-nav-item">
+        <span class="nav-icon">🎯</span>
+        <span>Habits</span>
+      </a>
+      <a href="analytics.html" class="mobile-nav-item">
+        <span class="nav-icon">📈</span>
+        <span>Analytics</span>
+      </a>
+    </nav>
+  </div>
+
+  <!-- Session Completed Modal -->
+  <div class="modal-overlay" id="finish-session-modal" role="dialog" aria-modal="true" aria-labelledby="modal-finish-title">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="modal-finish-title" style="font-size: 1.25rem;">Session Completed 🎉</h3>
+        <button class="modal-close" id="close-session-modal" aria-label="Close modal">×</button>
+      </div>
+      <div style="background-color: var(--bg-input); padding: 1rem; border-radius: var(--radius-md); margin-bottom: 1.25rem; border: 1px solid var(--border-color);">
+        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+          <span class="text-sm text-muted">Subject:</span>
+          <strong class="text-sm" id="modal-session-subject">-</strong>
+        </div>
+        <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+          <span class="text-sm text-muted">Topic:</span>
+          <strong class="text-sm" id="modal-session-topic">-</strong>
+        </div>
+        <div style="display: flex; justify-content: space-between;">
+          <span class="text-sm text-muted">Duration:</span>
+          <strong class="text-sm" style="color: var(--primary);" id="modal-session-duration">0m</strong>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="session-notes-input" class="form-label">Session Notes & Formulas Covered (Optional)</label>
+        <textarea id="session-notes-input" class="form-textarea" rows="3" placeholder="e.g. Solved 15 Banker's Algorithm questions, reviewed safety algorithm proof..."></textarea>
+      </div>
+
+      <div style="display: flex; justify-content: flex-end; gap: 0.75rem;">
+        <button class="btn btn-secondary" onclick="document.getElementById('finish-session-modal').classList.remove('active')">Cancel</button>
+        <button class="btn btn-primary" id="save-session-btn">Save Session</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Daily Check-in Modal -->
+  <div class="modal-overlay" id="checkin-modal" role="dialog" aria-modal="true" aria-labelledby="checkin-modal-title">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="checkin-modal-title" style="font-size: 1.25rem;">Daily Preparation Check-in 📝</h3>
+        <button class="modal-close" id="close-checkin-modal" aria-label="Close modal">×</button>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">How was your preparation today?</label>
+        <div style="display: flex; justify-content: space-between; gap: 0.5rem; margin-top: 0.25rem;">
+          <button type="button" class="btn btn-secondary rating-btn" data-rating="1" style="flex: 1; flex-direction: column; padding: 0.6rem 0.2rem;">
+            <span style="font-size: 1.3rem;">😞</span><span class="text-xs">1</span>
+          </button>
+          <button type="button" class="btn btn-secondary rating-btn" data-rating="2" style="flex: 1; flex-direction: column; padding: 0.6rem 0.2rem;">
+            <span style="font-size: 1.3rem;">😐</span><span class="text-xs">2</span>
+          </button>
+          <button type="button" class="btn btn-secondary rating-btn" data-rating="3" style="flex: 1; flex-direction: column; padding: 0.6rem 0.2rem;">
+            <span style="font-size: 1.3rem;">🙂</span><span class="text-xs">3</span>
+          </button>
+          <button type="button" class="btn btn-secondary rating-btn active" data-rating="4" style="flex: 1; flex-direction: column; padding: 0.6rem 0.2rem;">
+            <span style="font-size: 1.3rem;">😄</span><span class="text-xs">4</span>
+          </button>
+          <button type="button" class="btn btn-secondary rating-btn" data-rating="5" style="flex: 1; flex-direction: column; padding: 0.6rem 0.2rem;">
+            <span style="font-size: 1.3rem;">🔥</span><span class="text-xs">5</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="checkin-accomplishments" class="form-label">What did you accomplish today?</label>
+        <textarea id="checkin-accomplishments" class="form-textarea" rows="2" placeholder="e.g. Revised Pointers & Dynamic Memory, solved 25 GATE questions"></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="checkin-tomorrow" class="form-label">What will you focus on tomorrow?</label>
+        <textarea id="checkin-tomorrow" class="form-textarea" rows="2" placeholder="e.g. Complete Binary Trees, start Binary Search Trees"></textarea>
+      </div>
+
+      <div style="display: flex; justify-content: flex-end; gap: 0.75rem;">
+        <button class="btn btn-primary" id="submit-checkin-btn">Submit Check-in</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/navigation.js"></script>
+  <script src="js/dashboard.js"></script>
+</body>
+</html>

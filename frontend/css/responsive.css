@@ -1,0 +1,118 @@
+/* ==========================================================================
+   GATETrack - Responsive Media Queries
+   ========================================================================== */
+
+/* Large Tablets & Small Laptops (<= 1024px) */
+@media (max-width: 1024px) {
+  :root {
+    --sidebar-width: 220px;
+  }
+
+  .main-content {
+    padding: 1.75rem;
+  }
+}
+
+/* Tablets & Mobile (<= 768px) */
+@media (max-width: 768px) {
+  .sidebar {
+    display: none !important;
+  }
+
+  .mobile-topbar {
+    display: flex;
+  }
+
+  .mobile-bottom-nav {
+    display: flex;
+  }
+
+  .main-content {
+    margin-left: 0 !important;
+    padding: 1.25rem 1rem !important;
+    padding-top: 72px !important;
+    padding-bottom: calc(var(--mobile-nav-height) + 1.75rem) !important;
+    width: 100%;
+    overflow-x: hidden;
+  }
+
+  .page-header {
+    margin-bottom: 1.25rem;
+  }
+
+  .page-title {
+    font-size: 1.5rem;
+  }
+
+  .metrics-grid {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 0.85rem !important;
+  }
+
+  .dashboard-columns {
+    grid-template-columns: 1fr !important;
+    gap: 1.25rem !important;
+  }
+
+  .analytics-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .timer-box {
+    padding: 2rem 1rem !important;
+  }
+
+  .timer-display {
+    font-size: 3rem !important;
+  }
+
+  .timer-controls {
+    flex-wrap: wrap;
+    gap: 0.75rem;
+  }
+
+  .timer-controls .btn {
+    flex: 1 1 40%;
+    min-width: 120px;
+  }
+}
+
+/* Small Mobile Phones (<= 414px) */
+@media (max-width: 414px) {
+  .metrics-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .card {
+    padding: 1.15rem;
+  }
+
+  .page-title {
+    font-size: 1.35rem;
+  }
+
+  .timer-display {
+    font-size: 2.6rem !important;
+  }
+
+  .btn-lg {
+    padding: 0.75rem 1.25rem;
+    font-size: 0.95rem;
+  }
+
+  .habits-item-content {
+    gap: 0.5rem;
+  }
+}
+
+/* Extra Small (<= 320px) */
+@media (max-width: 320px) {
+  .mobile-nav-item span {
+    display: none;
+  }
+  
+  .mobile-nav-item {
+    min-width: 44px;
+    padding: 0.5rem 0.25rem;
+  }
+}
